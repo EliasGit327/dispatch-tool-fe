@@ -1,0 +1,14 @@
+<mat-selection-list [multiple]="false" class="w-60" (selectionChange)="onSelect()">
+  <mat-list-option [routerLink]="'/dashboard'">
+    <mat-icon mat-list-icon>home</mat-icon>
+    <div mat-line>Home</div>
+  </mat-list-option>
+  <mat-list-option [routerLink]="'/logs'">
+    <mat-icon mat-list-icon>list_alt</mat-icon>
+    <div mat-line>Logs</div>
+  </mat-list-option>
+  <mat-list-option [routerLink]="'/settings'">
+    <mat-icon mat-list-icon>settings</mat-icon>
+    <div mat-line>Settings</div>
+  </mat-list-option>
+</mat-selection-list>
