@@ -8,6 +8,8 @@ import { UnauthLayoutComponent } from './layout/unauth-layout/unauth-layout.comp
 import { RouterModule } from "@angular/router";
 import { AppRoutingModule } from "./app.routing.module";
 import { UserLayoutComponent } from "./layout/user-layout/user-layout.component";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { JwtInterceptor } from "./core/interceptors/jwt.interceptor";
 
 @NgModule({
   declarations: [
@@ -22,8 +24,11 @@ import { UserLayoutComponent } from "./layout/user-layout/user-layout.component"
     MaterialModule,
     RouterModule,
     AppRoutingModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

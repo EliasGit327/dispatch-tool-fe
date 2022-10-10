@@ -12,22 +12,27 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'dashboard',
+    path: '',
     component: UserLayoutComponent,
     canActivate: [AuthGuard],
-    loadChildren:  () => import('./modules/home/home.module').then(m => m.HomeModule),
-  },
-  {
-    path: 'logs',
-    component: UserLayoutComponent,
-    canActivate: [AuthGuard],
-    loadChildren:  () => import('./modules/logging/logging.module').then(m => m.LoggingModule),
-  },
-  {
-    path: 'settings',
-    component: UserLayoutComponent,
-    canActivate: [AuthGuard],
-    loadChildren:  () => import('./modules/settings/settings.module').then(m => m.SettingsModule),
+    children: [
+      {
+        path: 'dashboard',
+        loadChildren:  () => import('./modules/home/home.module').then(m => m.HomeModule),
+      },
+      {
+        path: 'user',
+        loadChildren:  () => import('./modules/users/users.module').then(m => m.UsersModule),
+      },
+      {
+        path: 'logs',
+        loadChildren:  () => import('./modules/logging/logging.module').then(m => m.LoggingModule),
+      },
+      {
+        path: 'settings',
+        loadChildren:  () => import('./modules/settings/settings.module').then(m => m.SettingsModule),
+      },
+    ]
   },
   {
     path: 'auth',

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
-interface ICreateUserDto {
-  username: string,
-  password: string,
-}
+import { HttpUsersService } from "../../../../core/web-data/http-users/http-users.service";
+import { ICreateUserDto } from "../../../../core/dtos/create-dto";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-sign-up-page',
@@ -16,16 +14,40 @@ export class SignUpPageComponent implements OnInit {
   isLoading: boolean = false;
 
   signUpData: ICreateUserDto = {
-    username: '',
+    name: '',
     password: ''
   };
 
-  constructor() { }
+  constructor(
+    private httpUsers: HttpUsersService,
+    private snackBar: MatSnackBar
+
+  ) { }
+
+  onSuccess(data: any): void {
+    this.snackBar.open("User has been created!", "Close", { duration: 2000 });
+    this.signUpData = { name: "", password: "" }
+  }
+
+  createUser(): void {
+    if (this.repeatedPassword !== this.signUpData.password) {
+      this.snackBar.open("Password does not match!", "Close", { duration: 2000 });
+      return;
+    }
+
+    this.isLoading = true;
+    const sub = this.httpUsers.createUser(this.signUpData)
+      .subscribe({
+        next: (data) => this.onSuccess(data),
+        error: (e) => console.error(e)
+      });
+    sub.add(() => this.isLoading = false);
+  }
 
   ngOnInit(): void {
   }
 
   onSignUpBtnClick() {
-    this.isLoading = !this.isLoading;
+    this.createUser();
   }
 }

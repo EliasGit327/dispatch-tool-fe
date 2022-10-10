@@ -1,6 +1,6 @@
 <header style="z-index: 10000">
   <mat-toolbar color="primary" class="mat-elevation-z6 relative z-10">
-    <div class="sm:hidden">
+    <div class="lg:hidden">
       <button mat-icon-button (click)="onMenuClick.emit()">
         <mat-icon>menu</mat-icon>
       </button>
@@ -11,7 +11,9 @@
     </span>
 
     <button mat-icon-button [matMenuTriggerFor]="userMenu">
-      <mat-icon>person</mat-icon>
+      <mat-icon [matBadge]="authService.role === 1 ? 'U' : 'A'" matBadgeColor="accent" matBadgeSize="small">
+        person
+      </mat-icon>
     </button>
     <mat-menu #userMenu="matMenu">
       <button mat-menu-item [routerLink]="['/settings', 'profile']">

@@ -1,0 +1,40 @@
+<mat-card>
+  <mat-card-header class="items-center">
+    <mat-card-title>Dispatch settings</mat-card-title>
+    <div class="flex flex-grow justify-end">
+      <button mat-icon-button (click)="deleteSettings()" [disabled]="isLoading">
+        <mat-icon>
+          remove
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="onCreateBtnClick()" [disabled]="isLoading">
+        <mat-icon>
+          add
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="onRefreshBtnClick()" [disabled]="isLoading">
+        <mat-icon>
+          refresh
+        </mat-icon>
+      </button>
+    </div>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div>Name: {{data?.name}}</div>
+    <div>Password: {{data?.password}}</div>
+    <div>Context: {{data?.browserContext ? 'EXISTS' : 'NONE'}}</div>
+  </mat-card-content>
+
+  <mat-card-actions align="end" *ngIf="data">
+    <button mat-button [disabled]="isLoading" (click)="onTestBtnClick()">
+      TEST
+    </button>
+  </mat-card-actions>
+
+  <mat-card-footer *ngIf="isLoading">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

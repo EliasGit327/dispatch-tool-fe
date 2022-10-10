@@ -20,7 +20,7 @@ export class UserLayoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.breakpointObserver
-      .observe(['(min-width: 640px)'])
+      .observe(['(min-width: 992px)'])
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
           this.isMobile = false;
