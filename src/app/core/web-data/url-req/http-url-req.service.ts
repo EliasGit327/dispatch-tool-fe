@@ -5,21 +5,26 @@ import { Observable } from "rxjs";
 import { IUsersStatsDto } from "../../interfaces/users-stats";
 import { IUserEntity } from "../../entities/user-entity";
 import { CreateUserDto } from "../../dtos/create-user-dto";
+import UrlRequest from "../../entities/url-request";
 
 @Injectable({
   providedIn: 'root'
 })
-export class HttpUsersService {
+export class HttpUrlReqService {
   private readonly api: string;
   private readonly route: string;
 
   constructor(private http: HttpClient) {
     this.api = environment.backend;
-    this.route = `${environment.backend}/user`;
+    this.route = `${environment.backend}/request`;
   }
 
-  public getUsersStats(): Observable<IUsersStatsDto> {
-    return this.http.get<IUsersStatsDto>(`${this.route}/stats`);
+  public getForUser(): Observable<UrlRequest[]> {
+    return this.http.get<UrlRequest[]>(`${this.route}`);
+  }
+
+  public create(urlReq: UrlRequest): Observable<UrlRequest> {
+    return this.http.post<UrlRequest>(`${this.route}`, urlReq);
   }
 
   getUsersFullData(): Observable<IUserEntity[]> {

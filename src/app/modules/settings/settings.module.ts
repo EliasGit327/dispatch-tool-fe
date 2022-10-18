@@ -10,20 +10,33 @@ import {
 import {
   CreateDispatchSettingsDialogComponent
 } from "./pages/settings-page/components/dispatch-settings/create-dispatch-settings-dialog/create-dispatch-settings-dialog.component";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { UserDetailsComponent } from "./pages/profile-page/components/user-details/user-details.component";
+import { RequestsListComponent } from "./pages/settings-page/components/requests-list/requests-list.component";
+import {
+  CreateReqDialogComponent
+} from "./pages/settings-page/components/requests-list/create-req-dialog/create-req-dialog.component";
+import {
+  TelegramSettingsComponent
+} from "./pages/settings-page/components/telegram-settings/telegram-settings.component";
 
 @NgModule({
   declarations: [
     SettingsPageComponent,
     ProfilePageComponent,
     DispatchSettingsComponent,
-    CreateDispatchSettingsDialogComponent
+    CreateDispatchSettingsDialogComponent,
+    UserDetailsComponent,
+    RequestsListComponent,
+    CreateReqDialogComponent,
+    TelegramSettingsComponent
   ],
   imports: [
     CommonModule,
     SettingsRoutingModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class SettingsModule { }

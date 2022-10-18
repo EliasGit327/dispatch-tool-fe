@@ -1,14 +1,15 @@
-<mat-card>
+<mat-card >
   <mat-card-header class="items-center">
     <mat-card-title>Dispatch settings</mat-card-title>
     <div class="flex flex-grow justify-end">
-      <button mat-icon-button (click)="deleteSettings()" [disabled]="isLoading">
+      <button mat-icon-button (click)="deleteSettings()"
+              [disabled]="isLoading || !data" matTooltip="Delete settings">
         <mat-icon>
           remove
         </mat-icon>
       </button>
 
-      <button mat-icon-button (click)="onCreateBtnClick()" [disabled]="isLoading">
+      <button mat-icon-button (click)="onCreateBtnClick()" [disabled]="isLoading || !!data" matTooltip="Create settings">
         <mat-icon>
           add
         </mat-icon>
@@ -23,14 +24,34 @@
   </mat-card-header>
 
   <mat-card-content>
-    <div>Name: {{data?.name}}</div>
-    <div>Password: {{data?.password}}</div>
-    <div>Context: {{data?.browserContext ? 'EXISTS' : 'NONE'}}</div>
+    <ng-container *ngIf="data; else noData">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <u>Name:</u>
+          <br/>
+          {{data.name}}
+        </div>
+        <div>
+          <u>Password:</u>
+          <br/>
+          {{data.password}}</div>
+        <div>
+          <u>Context:</u>
+          <br/>
+          {{data.browserContext ? 'EXISTS' : 'NONE'}}</div>
+      </div>
+    </ng-container>
+
+    <ng-template #noData>
+      <div class="h-24 flex flex-grow justify-center items-center">
+        NO DATA
+      </div>
+    </ng-template>
   </mat-card-content>
 
   <mat-card-actions align="end" *ngIf="data">
-    <button mat-button [disabled]="isLoading" (click)="onTestBtnClick()">
-      TEST
+    <button mat-button [disabled]="isLoading" (click)="onTestBtnClick()" matTooltip="Test authentication and save it">
+      TEST AND SAVE AUTH
     </button>
   </mat-card-actions>
 

@@ -3,5 +3,17 @@
   <span>Settings</span>
 </mat-toolbar>
 <div class="container mx-auto p-4">
-  <app-dispatch-settings></app-dispatch-settings>
+
+  <h1>Main settings</h1>
+  <mat-divider></mat-divider>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+    <app-dispatch-settings></app-dispatch-settings>
+
+    <app-telegram-settings></app-telegram-settings>
+  </div>
+
+  <div class="my-4"></div>
+
+  <app-requests-list></app-requests-list>
 </div>

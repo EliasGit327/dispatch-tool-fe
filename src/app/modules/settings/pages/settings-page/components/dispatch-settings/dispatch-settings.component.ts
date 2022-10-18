@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import {
   CreateDispatchSettingsDialogComponent
 } from "./create-dispatch-settings-dialog/create-dispatch-settings-dialog.component";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: 'app-dispatch-settings',
@@ -19,6 +21,7 @@ export class DispatchSettingsComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
+    public snackBar: MatSnackBar,
     private httpDispatchSettings: HttpDispatchSettingsService
   ) {
   }
@@ -31,7 +34,7 @@ export class DispatchSettingsComponent implements OnInit {
     this.isLoading = true;
     const sub = this.httpDispatchSettings.delete()
       .subscribe({
-        next: () => this.requestSettings(),
+        next: () => this.data = undefined,
         error: (e) => console.error(e)
       });
     sub.add(() => this.isLoading = false)
@@ -52,9 +55,18 @@ export class DispatchSettingsComponent implements OnInit {
 
   requestSettings(): void {
     this.isLoading = true;
+    this.data = undefined;
     const sub = this.httpDispatchSettings.get().subscribe({
       next: (data) => this.data = data,
-      error: (e) => console.error(e)
+      error: (httpError: HttpErrorResponse) => {
+        if (httpError.status !== 404) {
+          console.error(httpError);
+          const mes = httpError.error.message;
+          this.snackBar.open(mes, "Close", {
+            duration: 5000, panelClass: ["bg-red-700", "text-white"]
+          });
+        }
+      }
     });
     sub.add(() => this.isLoading = false);
   }
@@ -62,7 +74,7 @@ export class DispatchSettingsComponent implements OnInit {
   requestTestAuth(): void {
     this.isLoading = true;
     const sub = this.httpDispatchSettings.test().subscribe({
-      next: (data) => console.warn(data),
+      next: (data) => this.requestSettings(),
       error: (e) => console.error(e)
     });
     sub.add(() => this.isLoading = false);

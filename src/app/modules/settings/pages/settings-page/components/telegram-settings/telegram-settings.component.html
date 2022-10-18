@@ -1,0 +1,18 @@
+<div class="grid grid-rows gap-4">
+
+    <mat-form-field appearance="outline" class="no-mat-f-mb">
+      <mat-label>Telegram ID</mat-label>
+      <input matInput type="text" [(ngModel)]="telegramId">
+    </mat-form-field>
+
+    <button mat-stroked-button class="bg-blue-700">
+      SET TELEGRAM ID
+      <mat-icon class="ml-2">
+        send
+      </mat-icon>
+    </button>
+
+    <button mat-stroked-button>
+      SEND TEST MESSAGE
+    </button>
+</div>

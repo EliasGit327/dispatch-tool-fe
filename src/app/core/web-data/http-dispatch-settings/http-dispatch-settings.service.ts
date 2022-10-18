@@ -29,6 +29,6 @@ export class HttpDispatchSettingsService {
   }
 
   public test(): Observable<any> {
-    return this.http.get(`${this.route}/test-auth`);
+    return this.http.get(`${this.route}/test`);
   }
 }

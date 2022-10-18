@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpAuthService } from "../../../../core/web-data/http-auth/http-auth.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { HttpUsersService } from "../../../../core/web-data/http-users/http-users.service";
+import { IUserEntity } from "../../../../core/entities/user-entity";
+import { UserRole } from "../../../../core/enums/user-role";
+import { UserService } from "../../../../core/services/user.service";
 
 @Component({
   selector: 'app-profile-page',
@@ -10,17 +14,11 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 export class ProfilePageComponent implements OnInit {
 
   constructor(
-    private httpAuth: HttpAuthService,
-    private snackBar: MatSnackBar
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }
 
-  onTestBtnClick(): void {
-    const sub = this.httpAuth.testAuth().subscribe({
-      next: (response) => this.snackBar.open(response.message, 'Close', { duration: 2000 }),
-      error: (e) => console.error(e)
-    });
-  }
+
 }

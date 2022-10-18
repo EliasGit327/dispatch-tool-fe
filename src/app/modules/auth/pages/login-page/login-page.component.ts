@@ -3,6 +3,7 @@ import { UserService } from "../../../../core/services/user.service";
 import { Router } from "@angular/router";
 import { HttpAuthService } from "../../../../core/web-data/http-auth/http-auth.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: 'app-login-page',
@@ -29,15 +30,22 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  startLoading(): void {
-    // this.authService.setToken('TEST-TOKEN');
+  loginBtnPressed(): void {
     this.isLoading = !this.isLoading;
-    const subscription = this.httpAuthService.login(this.authData).subscribe({
-      next: (data) => {
-        this.authService.setToken(data.token);
-      },
-      error: (e) => this.snackBar.open(e.error.message, 'Close', { duration: 2000 }),
-    });
+    const subscription = this.httpAuthService.login(this.authData)
+      .subscribe({
+        next: (data) => {
+          this.authService.setToken(data.token);
+        },
+        error: (e: HttpErrorResponse) => {
+          const text = e.status != 0 ? e.error.message : "Connection refused";
+          this.snackBar.open(
+            text,
+            "Close",
+            { duration: 2000, panelClass: ["bg-red-700", "text-white"] }
+          );
+        },
+      });
     subscription.add(() => this.isLoading = false);
   }
 

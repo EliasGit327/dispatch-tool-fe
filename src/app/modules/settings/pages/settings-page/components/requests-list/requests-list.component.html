@@ -1,0 +1,63 @@
+<div class="flex flex-row justify-between">
+  <h1>Url requests settings</h1>
+
+  <div>
+    <button mat-icon-button matTooltip="Create new" (click)="onCreateBtnClick()" [disabled]="isLoading">
+      <mat-icon>
+        add
+      </mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="Reload" (click)="onReloadBtnClick()" [disabled]="isLoading">
+      <mat-icon>
+        refresh
+      </mat-icon>
+    </button>
+  </div>
+</div>
+
+<mat-divider></mat-divider>
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+
+  <mat-card *ngFor="let req of urlReqs">
+
+    <mat-card-header>
+        <mat-card-subtitle>
+          {{req._id}}
+        </mat-card-subtitle>
+
+        <mat-card-title>
+          {{req.name}}
+        </mat-card-title>
+
+    </mat-card-header>
+
+    <mat-card-content class="p-4">
+      <div class="mb-2" *ngIf="req.description.length > 0">
+        <u>Description:</u>
+        <br/>
+        {{req.description}}
+      </div>
+
+      <div>
+        <u>URL:</u>
+        <br/>
+        {{req.url}}
+      </div>
+    </mat-card-content>
+
+
+    <mat-card-actions align="end">
+      <button mat-icon-button color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon>
+          edit
+        </mat-icon>
+      </button>
+    </mat-card-actions>
+
+  </mat-card>
+</div>

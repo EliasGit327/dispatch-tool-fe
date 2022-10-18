@@ -1,0 +1,58 @@
+<mat-card>
+
+  <div class="flex flex-row justify-between">
+    <div>
+      <mat-card-subtitle>
+        {{user?._id}}
+      </mat-card-subtitle>
+
+      <mat-card-title>
+        {{user?.name}}
+      </mat-card-title>
+    </div>
+
+    <div>
+      <button mat-icon-button disabled>
+        <mat-icon>
+          edit
+        </mat-icon>
+      </button>
+      <button mat-icon-button (click)="onRefreshBtnClick()" [disabled]="isLoading">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <mat-card-content style="min-height: 150px">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+
+      <div>
+        <u>Role:</u>
+        <br/>
+        {{userRole[this.userService.role || 0]}}
+      </div>
+      <div>
+        <u>Created at:</u>
+        <br/>
+        {{user?.createdAt | date}}
+      </div>
+
+      <div>
+        <u>Status:</u>
+        <br/>
+        Account {{user?.isActive ? 'is' : 'is not'}} activated
+      </div>
+    </div>
+
+  </mat-card-content>
+
+  <mat-card-footer *ngIf="isLoading">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+
+  <mat-card-actions align="end">
+
+  </mat-card-actions>
+</mat-card>
+

@@ -14,7 +14,7 @@ import { Router } from "@angular/router";
 })
 export class UserListPageComponent implements OnInit {
   dataSource!: MatTableDataSource<IUserEntity>;
-  displayedColumns: string[] = ["_id", "name", "role", "createdAt", "isActive", "actions"];
+  displayedColumns: string[] = ["name", "isActive", "role", "createdAt", "actions"];
   userRole = UserRole;
 
   @ViewChild(MatPaginator)

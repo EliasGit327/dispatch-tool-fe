@@ -4,7 +4,7 @@ import { AuthRoutingModule } from "./auth.routing.module";
 import { LoginPageComponent } from "./pages/login-page/login-page.component";
 import { RouterModule } from "@angular/router";
 import { MaterialModule } from "../../shared/material.module";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SignUpPageComponent } from "./pages/sign-up-page/sign-up-page.component";
 
 @NgModule({
@@ -18,6 +18,7 @@ import { SignUpPageComponent } from "./pages/sign-up-page/sign-up-page.component
     RouterModule,
     MaterialModule,
     FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthModule { }
