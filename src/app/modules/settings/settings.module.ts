@@ -19,6 +19,9 @@ import {
 import {
   TelegramSettingsComponent
 } from "./pages/settings-page/components/telegram-settings/telegram-settings.component";
+import {
+  EditReqDialogComponent
+} from "./pages/settings-page/components/requests-list/edit-req-dialog/edit-req-dialog.component";
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import {
     UserDetailsComponent,
     RequestsListComponent,
     CreateReqDialogComponent,
-    TelegramSettingsComponent
+    TelegramSettingsComponent,
+    EditReqDialogComponent
   ],
   imports: [
     CommonModule,

@@ -35,7 +35,7 @@ export class CreateReqDialogComponent implements OnInit {
     this.isLoading = true;
     this.reqFG.disable();
     const sub = this.reqHttpService.create(new UrlRequest(this.reqFG.value as UrlRequest)).subscribe({
-      next: (data) => console.warn(data),
+      next: (data) => this.dialogRef.close(data),
       error: (httpError: HttpErrorResponse) => console.error(httpError)
     });
     sub.add(() => {

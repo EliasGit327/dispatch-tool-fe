@@ -23,36 +23,42 @@
   <mat-card *ngFor="let req of urlReqs">
 
     <mat-card-header>
-        <mat-card-subtitle>
-          {{req._id}}
-        </mat-card-subtitle>
+      <mat-card-subtitle>
+        {{req._id}}
+      </mat-card-subtitle>
 
-        <mat-card-title>
-          {{req.name}}
-        </mat-card-title>
+      <mat-card-title>
+        {{req.name}}
+      </mat-card-title>
 
     </mat-card-header>
 
-    <mat-card-content class="p-4">
-      <div class="mb-2" *ngIf="req.description.length > 0">
-        <u>Description:</u>
-        <br/>
-        {{req.description}}
-      </div>
+    <mat-card-content class="px-4">
+      <div class="grid grid-cols-2 gap-2">
+        <div class="mb-2" *ngIf="req.description.length > 0">
+          <u>Description:</u>
+          <br/>
+          <div class="overflow-hidden overflow-ellipsis">
+            {{req.description}}
+          </div>
+        </div>
 
-      <div>
-        <u>URL:</u>
-        <br/>
-        {{req.url}}
+        <div>
+          <u>URL:</u>
+          <br/>
+          <div class="overflow-hidden overflow-ellipsis">
+            {{req.url}}
+          </div>
+        </div>
       </div>
     </mat-card-content>
 
 
     <mat-card-actions align="end">
-      <button mat-icon-button color="warn">
+      <button mat-icon-button color="warn" (click)="onDltBtnClick(req)" [disabled]="isLoading">
         <mat-icon>delete</mat-icon>
       </button>
-      <button mat-icon-button>
+      <button mat-icon-button [disabled]="isLoading" (click)="onEditBtnClick(req)">
         <mat-icon>
           edit
         </mat-icon>
